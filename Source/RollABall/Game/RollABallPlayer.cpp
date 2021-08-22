@@ -26,7 +26,9 @@ ARollABallPlayer::ARollABallPlayer()
 void ARollABallPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	MoveForce *= Mesh->GetMass();
+	JumpImpulse *= Mesh->GetMass();
 }
 
 // Called to bind functionality to input
