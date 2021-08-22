@@ -18,6 +18,8 @@ ARollABallPlayer::ARollABallPlayer()
 	RootComponent = Mesh;
 	SpringArm->SetupAttachment(Mesh);
 	Camera->SetupAttachment(SpringArm);
+
+	Mesh->SetSimulatePhysics(true);
 }
 
 // Called when the game starts or when spawned
