@@ -32,18 +32,26 @@ void ARollABallPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	InputComponent->BindAxis("MoveForward", this, &ARollABallPlayer::MoveForward);
+	InputComponent->BindAxis("MoveRight", this, &ARollABallPlayer::MoveRight);
+
+	InputComponent->BindAction("Jump", IE_Pressed, this, &ARollABallPlayer::Jump);
 }
 
-void ARollABallPlayer::MoveRight(float p_Value)
+void ARollABallPlayer::MoveRight(float Value)
 {
-	
+	const FVector Right = Camera->GetRightVector() * MoveForce * Value;
+	Mesh->AddForce(Right);
 }
 
-void ARollABallPlayer::MoveForward(float p_Value)
+void ARollABallPlayer::MoveForward(float Value)
 {
+	const FVector l_Forward = Camera->GetForwardVector() * MoveForce * Value;
+	Mesh->AddForce(l_Forward);
 }
 
 void ARollABallPlayer::Jump()
 {
+	Mesh->AddImpulse(FVector(0, 0, JumpImpulse));
 }
 

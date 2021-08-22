@@ -56,7 +56,7 @@ private:
 
 	// Functions
 
-	void MoveRight(float p_Value);
-	void MoveForward(float p_Value);
+	void MoveRight(float Value);
+	void MoveForward(float Value);
 	void Jump();
 };
