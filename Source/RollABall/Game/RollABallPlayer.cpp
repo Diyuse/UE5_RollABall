@@ -20,6 +20,8 @@ ARollABallPlayer::ARollABallPlayer()
 	Camera->SetupAttachment(SpringArm);
 
 	Mesh->SetSimulatePhysics(true);
+
+	Mesh->OnComponentHit.AddDynamic(this, &ARollABallPlayer::OnHit);
 }
 
 // Called when the game starts or when spawned
@@ -56,6 +58,18 @@ void ARollABallPlayer::MoveForward(float Value)
 
 void ARollABallPlayer::Jump()
 {
+	if (JumpCount >= MaxJumpCount) { return; }
+
 	Mesh->AddImpulse(FVector(0, 0, JumpImpulse));
+	JumpCount++;
+}
+
+void ARollABallPlayer::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	const float HitDirection = Hit.Normal.Z;
+	if (HitDirection > 0) 
+	{
+		JumpCount = 0;
+	}
 }
 
