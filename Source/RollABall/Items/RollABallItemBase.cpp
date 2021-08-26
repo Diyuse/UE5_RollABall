@@ -3,6 +3,7 @@
 
 #include "RollABallItemBase.h"
 #include "RollABall/Game/RollABallPlayer.h"
+#include "RollABall/Game/RollABallGameModeBase.h"
 
 // Sets default values
 ARollABallItemBase::ARollABallItemBase()
@@ -27,15 +28,20 @@ void ARollABallItemBase::BeginPlay()
 void ARollABallItemBase::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
 	bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (Cast<ARollABallPlayer>(OtherActor) != nullptr) {
+	if (Cast<ARollABallPlayer>(OtherActor) != nullptr) 
+	{
 		Collected();
 	}
 }
 
 void ARollABallItemBase::Collected_Implementation()
 {
-	// TODO - Game Mode
+	ARollABallGameModeBase* GameMode = Cast<ARollABallGameModeBase>(GetWorld()->GetAuthGameMode());
 
+	if (GameMode) 
+	{
+		GameMode->ItemCollected();
+	}
 }
 
 

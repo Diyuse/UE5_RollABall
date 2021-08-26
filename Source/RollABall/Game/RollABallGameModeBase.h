@@ -6,6 +6,9 @@
 #include "GameFramework/GameModeBase.h"
 #include "RollABallGameModeBase.generated.h"
 
+class URollABallWidget;
+class UUserWidget;
+
 /**
  * 
  */
@@ -20,7 +23,12 @@ protected:
 	int32 ItemsCollected = 0;
 	int32 ItemsInLevel = 0;
 
-	// TODO - Implement Widget Variables
+	UPROPERTY(EditAnywhere, Category="Widgets")
+	TSubclassOf<UUserWidget> GameWidgetClass;
+
+	UPROPERTY()
+	URollABallWidget* GameWidget;
+
 
 	// Functions
 
